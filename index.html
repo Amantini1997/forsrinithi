@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💖 Be My Valentine? 💖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 50%, #ffd6eb 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Floating hearts animation */
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            animation: float 6s infinite ease-in-out;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+                opacity: 0.8;
+            }
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .kitten-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            border: 5px solid #ff69b4;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        h1 {
+            color: #ff1493;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+        }
+
+        .question {
+            font-size: 1.5em;
+            color: #ff69b4;
+            margin: 20px 0;
+            /* animation: pulse 1.5s infinite; */
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Comic Sans MS', cursive;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: white;
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.4);
+        }
+
+        .no-btn {
+            background: linear-gradient(135deg, #d3d3d3, #a74d4d);
+            color: #652626;
+        }
+
+        .no-btn:hover:not(:disabled) {
+            transform: scale(0.95);
+        }
+
+        .no-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .success-container {
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .success-gif {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 20px;
+            margin: 20px auto;
+        }
+
+        .celebration {
+            font-size: 3em;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .question {
+                font-size: 1.2em;
+            }
+
+            button {
+                padding: 12px 30px;
+                font-size: 1em;
+            }
+
+            .kitten-img {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating hearts -->
+    <div class="heart" style="left: 10%; top: 20%; animation-delay: 0s;">💕</div>
+    <div class="heart" style="left: 20%; top: 60%; animation-delay: 1s;">💖</div>
+    <div class="heart" style="left: 80%; top: 30%; animation-delay: 2s;">💗</div>
+    <div class="heart" style="left: 90%; top: 70%; animation-delay: 1.5s;">💝</div>
+    <div class="heart" style="left: 15%; top: 80%; animation-delay: 0.5s;">💓</div>
+    <div class="heart" style="left: 85%; top: 15%; animation-delay: 2.5s;">💕</div>
+
+    <div class="container" id="mainContainer">
+        <img class="kitten-img" id="kittenImg" src="https://cataas.com/cat/cute?width=200" alt="Cute kitten">
+        <h1>Patataaa! 💖</h1>
+        <p class="question" id="question">Do you want to be my Valentine? 🌹</p>
+        <div class="buttons">
+            <button class="yes-btn" onclick="handleYes()">Yes! 💕</button>
+            <button class="no-btn" id="noBtn" onclick="handleNo()">No</button>
+        </div>
+    </div>
+
+    <div class="container success-container" id="successContainer">
+        <div class="celebration">🎉 💖 🎊</div>
+        <h1>Yay! You said YES! 💕</h1>
+        <img class="success-gif" src="https://cataas.com/cat/gif?tag=cute" alt="Happy kitten">
+        <p class="question">You just made a kitten somewhere so happy! 😻</p>
+        <div class="celebration">🐱 💝 🐾</div>
+    </div>
+
+    <script>
+        let noCount = 0;
+        const maxNos = 11;
+
+        const sadQuestions = [
+            "Are you sure? 🥺",
+            "Pretty please? 😿",
+            "Not even a little bit? 💔",
+            "You just made a kitten somewhere sad now... 😭",
+            "Please reconsider? 🙏",
+            "This is breaking my heart... 💔😢",
+            "Even the sad kitten somewhere thinks you should say yes... 🐱",
+            "One more chance? Please? 🥺👉👈",
+            "The kitten has been crying for hours... 😿💧",
+            "Last chance before the sad kitten somewhere never smiles again... 😭",
+        ];
+
+        const noButtonTexts = [
+            "Still no",
+            "I am a bad person, so no",
+            "I am a terrible person, so no",
+            "I am a the worst person, so no",
+            "I like kittens to get sad, so no",
+            "I like kittens to get hurt, so no",
+            "I like kittens to feel pain, so no",
+            "I like kittens to suffer, so no",
+            "I like kittens to agonise, so no",
+            "I like kittens to die, so no",
+        ];
+
+        const sadKittenImages = [
+            "https://cataas.com/cat/cute?width=200&t=1",
+            "https://cataas.com/cat/cute?width=200&t=2",
+            "https://cataas.com/cat/cute?width=200&t=3",
+            "https://cataas.com/cat/cute?width=200&t=4",
+            "https://cataas.com/cat/cute?width=200&t=5",
+            "https://cataas.com/cat/cute?width=200&t=6",
+            "https://cataas.com/cat/cute?width=200&t=7",
+            "https://cataas.com/cat/cute?width=200&t=8",
+            "https://cataas.com/cat/cute?width=200&t=9",
+            "https://cataas.com/cat/cute?width=200&t=10",
+            "https://cataas.com/cat/cute?width=200&t=11"
+        ];
+
+        function handleYes() {
+            document.getElementById('mainContainer').style.display = 'none';
+            document.getElementById('successContainer').style.display = 'block';
+            
+            // Create confetti effect
+            createConfetti();
+        }
+
+        function handleNo() {
+            noCount++;
+            const animationTimeMs = 500;
+            
+            if (noCount < maxNos) {
+                // Add shake animation
+                document.getElementById('mainContainer').style.animation = `shake ${animationTimeMs}ms`;
+
+                setTimeout(() => {
+                // Update kitten image to show progression
+                document.getElementById('kittenImg').src = sadKittenImages[noCount];
+
+                // Update question
+                document.getElementById('question').textContent = sadQuestions[noCount - 1];
+                
+                // Update no button text
+                document.getElementById('noBtn').textContent = noButtonTexts[noCount];
+
+                // Add slide in animation
+                document.getElementById('mainContainer').style.animation = `slideIn ${animationTimeMs}ms ease-out`;
+                }, animationTimeMs);
+            } else {
+                // Disable the no button after max attempts
+                document.getElementById('noBtn').disabled = true;
+                document.getElementById('noBtn').textContent = "😿";
+                document.getElementById('question').textContent = "Well, I guess you'll have to say yes now! 💕";
+            }
+        }
+
+        function createConfetti() {
+            const emojis = ['💕', '💖', '💗', '💝', '🐱', '😻', '🌹', '✨', '💐', '🎀'];
+            
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    confetti.style.position = 'fixed';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-50px';
+                    confetti.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                    confetti.style.animation = 'fall 3s linear';
+                    confetti.style.zIndex = '1000';
+                    
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 100);
+            }
+        }
+
+        // Add shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+                20%, 40%, 60%, 80% { transform: translateX(2px); }
+            }
+            
+            @keyframes fall {
+                to {
+                    transform: translateY(100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
