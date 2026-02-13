@@ -113,6 +113,7 @@
             justify-content: center;
             margin-top: 30px;
             flex-wrap: wrap;
+            flex-direction: column;
         }
 
         button {
@@ -124,6 +125,7 @@
             font-weight: bold;
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
         }
 
         .yes-btn {
@@ -185,6 +187,10 @@
                 font-size: 1em;
             }
 
+            .buttons {
+                flex-direction: column;
+            }
+
             .kitten-img {
                 width: 150px;
                 height: 150px;
@@ -230,23 +236,24 @@
             "You just made a kitten somewhere sad now... 😭",
             "Please reconsider? 🙏",
             "This is breaking my heart... 💔😢",
-            "Even the sad kitten somewhere thinks you should say yes... 🐱",
+            "Even the sad kitten thinks you should say yes... 🐱",
             "One more chance? Please? 🥺👉👈",
-            "The kitten has been crying for hours... 😿💧",
-            "Last chance before the sad kitten somewhere never smiles again... 😭",
+            "The sad kitten will never smile again... 😭",
+            "Last chance before the kitten dies 😿",
         ];
 
         const noButtonTexts = [
             "Still no",
-            "I am a bad person, so no",
-            "I am a terrible person, so no",
-            "I am a the worst person, so no",
-            "I like kittens to get sad, so no",
-            "I like kittens to get hurt, so no",
+            "I am a bad person, so yeah I am sure",
+            "No, and don't call me patata",
+            "I'd rather die myself",
+            "I like kittens to get sad, so that's fine",
+            "I am a the worst person ever, so no",
+            "Fuck you",
             "I like kittens to feel pain, so no",
-            "I like kittens to suffer, so no",
-            "I like kittens to agonise, so no",
-            "I like kittens to die, so no",
+            "Still a no, I hate you",
+            "I hope you will never smile again either",
+            "I want the kitten to die"
         ];
 
         const sadKittenImages = [
@@ -295,7 +302,7 @@
             } else {
                 // Disable the no button after max attempts
                 document.getElementById('noBtn').disabled = true;
-                document.getElementById('noBtn').textContent = "😿";
+                document.getElementById('noBtn').textContent = "Enough of this, this is now disabled";
                 document.getElementById('question').textContent = "Well, I guess you'll have to say yes now! 💕";
             }
         }
